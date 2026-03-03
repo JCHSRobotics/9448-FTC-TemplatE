@@ -1,13 +1,20 @@
+package org.firstinspires.ftc.teamcode.Subsystems.Drive;
+
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-public class drive extends Subsystem{
-    
-    frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_drive");
-    backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive");
-    frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
-    backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
+
+import driveConstants;
+
+public class drive extends Subsystem { 
+
+    private DCMotor frontLeftDrive = hardwareMap.get(DcMotor.class, "ID0");
+    private DCMotor backLeftDrive = hardwareMap.get(DcMotor.class, "ID0");
+    private DCMotor frontRightDrive = hardwareMap.get(DcMotor.class, "ID0");
+    private DCMotor backRightDrive = hardwareMap.get(DcMotor.class, "ID0");
 
     private double frontLeftPower;
     private double frontRightPower;
