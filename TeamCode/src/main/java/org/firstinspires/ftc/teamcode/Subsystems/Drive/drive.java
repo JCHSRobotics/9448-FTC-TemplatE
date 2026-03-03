@@ -3,6 +3,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class drive extends Subsystem{
+    
+    frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_drive");
+    backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive");
+    frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
+    backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
 
     private double frontLeftPower;
     private double frontRightPower;
