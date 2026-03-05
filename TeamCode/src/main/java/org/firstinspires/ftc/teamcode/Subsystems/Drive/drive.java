@@ -6,16 +6,19 @@ import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import static org.firstinspires.ftc.teamcode.Subsystems.driveConstants.*;
 ;
 
-public class drive extends Subsystem { 
-
-    private DCMotor frontLeftDrive = hardwareMap.get(DcMotor.class, ID0);
-    private DCMotor backLeftDrive = hardwareMap.get(DcMotor.class, ID1);
-    private DCMotor frontRightDrive = hardwareMap.get(DcMotor.class, ID2);
-    private DCMotor backRightDrive = hardwareMap.get(DcMotor.class, ID3);
+public class Drive extends Subsystem {
+    public void init(HardwareMap hardwareMap) {
+        // initialize motors here
+        private DCMotor frontLeftDrive = hardwareMap.get(DcMotor.class, ID0);
+        private DCMotor backLeftDrive = hardwareMap.get(DcMotor.class, ID1);
+        private DCMotor frontRightDrive = hardwareMap.get(DcMotor.class, ID2);
+        private DCMotor backRightDrive = hardwareMap.get(DcMotor.class, ID3);
+    }
 
     private double frontLeftPower;
     private double frontRightPower;
