@@ -1,11 +1,12 @@
-package org.firstinspires.ftc.teamcode.Robot;
+package org.firstinspires.ftc.teamcode;
 
 
+import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Subsystems.Drive;
+import org.firstinspires.ftc.teamcode.Subsystems.Drive.Drive;
 
 
 @TeleOp(name = "Robot TeleOp")
@@ -19,13 +20,22 @@ public class Robot extends LinearOpMode {
     public void runOpMode() {
         drive.init(hardwareMap);
 
+        drive.setDefaultCommand(
+                drive.driveCommand(
+                        () -> -gamepad1.left_stick_y,
+                        () -> gamepad1.left_stick_x,
+                        () -> gamepad1.right_stick_x
+                )
+        );
+
         waitForStart();
         runtime.reset();
 
 
         while (opModeIsActive()) {
             // robot code
-            drive.driveCommand(gamepad1.left_stick_x, gamepad1.left_stick_y, gamepad1.right_stick_x);
+
+            CommandScheduler.getInstance().run();
 
             telemetry.update();
         }

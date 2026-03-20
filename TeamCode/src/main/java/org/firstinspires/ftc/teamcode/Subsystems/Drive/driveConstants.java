@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.Subsystems.driveConstants;
+package org.firstinspires.ftc.teamcode.Subsystems.Drive;
 
-public class driveConstants {
+public class DriveConstants {
 
-    public final static string ID0 = "FrontRightDrive";
-    public final static string ID1 = "FrontLeftDrive";
-    public final static string ID2 = "BackRightDrive";
-    public final static string ID3 = "BackLeftDrive";
+    public static final String ID0 = "FrontRightDrive";
+    public static final String ID1 = "FrontLeftDrive";
+    public static final String ID2 = "BackRightDrive";
+    public static final String ID3 = "BackLeftDrive";
 
 }
