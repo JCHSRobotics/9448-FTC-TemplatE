@@ -1,2 +1,10 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        mavenCentral()
+        google()
+    }
+}
+
 include ':FtcRobotController'
 include ':TeamCode'
