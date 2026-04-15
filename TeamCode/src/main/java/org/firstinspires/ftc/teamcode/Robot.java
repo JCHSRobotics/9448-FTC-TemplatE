@@ -7,18 +7,21 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Subsystems.Drive.Drive;
+import org.firstinspires.ftc.teamcode.Subsystems.Intake.Intake;
 
 
 @TeleOp(name = "Robot TeleOp")
 public class Robot extends LinearOpMode {
 
     private Drive drive = new Drive();
+    private Intake intake = new Intake();
 
     private ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void runOpMode() {
         drive.init(hardwareMap);
+        intake.init(hardwareMap);
 
         drive.setDefaultCommand(
                 drive.driveCommand(
@@ -27,6 +30,8 @@ public class Robot extends LinearOpMode {
                         () -> gamepad1.right_stick_x
                 )
         );
+        intake.setDefaultCommand(intake.intakeStop());
+
 
         waitForStart();
         runtime.reset();
