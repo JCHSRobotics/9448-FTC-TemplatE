@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.Subsystems.Drive;
 
-
-
 import static org.firstinspires.ftc.teamcode.Subsystems.Drive.DriveConstants.*;
 
 import com.arcrobotics.ftclib.command.RunCommand;
@@ -38,8 +36,8 @@ public class Drive extends SubsystemBase {
     public void periodic() {
         UpdateInputs(frontLeftPower, frontRightPower, backLeftPower, backRightPower);
     }
-    
-    
+
+
     public void drive (double forward, double turn, double straif){
         frontLeftPower = forward - turn - straif;
         frontRightPower = forward + turn - straif;
