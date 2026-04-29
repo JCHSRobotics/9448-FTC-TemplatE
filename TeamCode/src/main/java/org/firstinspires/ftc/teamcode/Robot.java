@@ -28,7 +28,8 @@ public class Robot extends LinearOpMode {
         drive.init(hardwareMap);
         intake.init(hardwareMap);
 
-        gamepad = new GamepadEx(gamepad1);
+        //gamepad = new GamepadEx(gamepad1);
+
 
         drive.setDefaultCommand(
                 drive.driveCommand(
@@ -37,7 +38,8 @@ public class Robot extends LinearOpMode {
                         () -> gamepad1.right_stick_x
                 )
         );
-        //intake.setDefaultCommand(intake.intakeStop());
+        intake.setDefaultCommand(intake.intakeStop());
+
 
 
         waitForStart();
@@ -53,8 +55,8 @@ public class Robot extends LinearOpMode {
 
 
 
-//            gamepad.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileActiveContinuous(intake.intakeRun());
-//            gamepad.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whileActiveContinuous(intake.intakeReverse());
+            gamepad.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileActiveContinuous(intake.intakeRun());
+            gamepad.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whileActiveContinuous(intake.intakeReverse());
 
         }
     }

@@ -11,13 +11,13 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.command.Command;
 
 import java.util.function.DoubleSupplier;
-
-public class Intake extends SubsystemBase{
+public class Intake extends SubsystemBase {
     private DcMotor rightIntake;
     private DcMotor leftIntake;
 
     public void init(HardwareMap hardwareMap) {
         // initialize motors here
+
         rightIntake = hardwareMap.get(DcMotor.class, ID4);
         leftIntake = hardwareMap.get(DcMotor.class, ID5);
         rightIntake.setDirection(DcMotor.Direction.FORWARD);
@@ -38,22 +38,22 @@ public class Intake extends SubsystemBase{
         leftIntake.setPower(leftIntakePower);
     }
 
-    private void intake (double volts){
+    private void intake(double volts){
         rightIntakePower = volts;
         leftIntakePower = volts;
     }
 
 
     public Command intakeStop() {
-        return new RunCommand(() -> intake(0));
+        return new RunCommand(()-> intake(0), this);
     }
 
     public Command intakeRun() {
-        return new RunCommand(() -> intake(1));
+        return new RunCommand(()-> intake(1), this);
     }
 
     public Command intakeReverse() {
-        return new RunCommand(() -> intake(-1));
+        return new RunCommand(()-> intake(-1), this);
     }
 
 
