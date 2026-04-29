@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.Drive.Drive;
 import org.firstinspires.ftc.teamcode.Subsystems.Intake.Intake;
 
 
-@TeleOp(name = "Robot TeleOp")
+@TeleOp(name = "Robot TeleOp2")
 public class Robot extends LinearOpMode {
 
     private Drive drive = new Drive();
@@ -24,6 +24,7 @@ public class Robot extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        CommandScheduler.getInstance().reset();
         drive.init(hardwareMap);
         intake.init(hardwareMap);
 
@@ -31,12 +32,12 @@ public class Robot extends LinearOpMode {
 
         drive.setDefaultCommand(
                 drive.driveCommand(
-                        () -> gamepad1.left_stick_y,
+                        () -> -gamepad1.left_stick_y,
                         () -> gamepad1.left_stick_x,
                         () -> gamepad1.right_stick_x
                 )
         );
-        intake.setDefaultCommand(intake.intakeStop());
+        //intake.setDefaultCommand(intake.intakeStop());
 
 
         waitForStart();
@@ -52,8 +53,8 @@ public class Robot extends LinearOpMode {
 
 
 
-            gamepad.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileActiveContinuous(intake.intakeRun());
-            gamepad.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whileActiveContinuous(intake.intakeReverse());
+//            gamepad.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileActiveContinuous(intake.intakeRun());
+//            gamepad.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whileActiveContinuous(intake.intakeReverse());
 
         }
     }
