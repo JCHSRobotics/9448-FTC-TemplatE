@@ -18,10 +18,11 @@ public class Drive extends SubsystemBase {
     private DcMotor backRightDrive;
     public void init(HardwareMap hardwareMap) {
         // initialize motors here
-        frontLeftDrive = hardwareMap.get(DcMotor.class, ID0);
-        backLeftDrive = hardwareMap.get(DcMotor.class, ID1);
-        frontRightDrive = hardwareMap.get(DcMotor.class, ID2);
-        backRightDrive = hardwareMap.get(DcMotor.class, ID3);
+        frontLeftDrive = hardwareMap.get(DcMotor.class, ID1);
+        backLeftDrive = hardwareMap.get(DcMotor.class, ID3);
+        frontRightDrive = hardwareMap.get(DcMotor.class, ID0);
+        backRightDrive = hardwareMap.get(DcMotor.class, ID2);
+
         frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -41,8 +42,8 @@ public class Drive extends SubsystemBase {
     public void drive (double forward, double turn, double straif){
         frontLeftPower = forward - turn - straif;
         frontRightPower = forward + turn - straif;
-        backLeftPower = forward - turn + straif;
-        backRightPower = forward + turn + straif;
+        backLeftPower = forward - turn - straif;
+        backRightPower = forward + turn - straif;
 
         double max = Math.max(1.0, Math.max(
                 Math.max(Math.abs(frontLeftPower), Math.abs(frontRightPower)),
