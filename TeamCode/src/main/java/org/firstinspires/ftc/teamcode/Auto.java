@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.arcrobotics.ftclib.command.CommandScheduler;
+import com.arcrobotics.ftclib.command.RunCommand;
+import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -32,7 +34,8 @@ public class Auto extends LinearOpMode {
 
 
         while (opModeIsActive()) {
-            drive.driveCommand(()-> 0, ()-> 0, ()-> 1).andThen(intake.intakeRun());
+            new RunCommand(() -> drive.driveCommand(()-> 0, ()-> 0, ()-> 1)).andThen(intake.intakeRun());
+
         }
     }
 
