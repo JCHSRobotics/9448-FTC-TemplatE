@@ -1,67 +1,39 @@
 package org.firstinspires.ftc.teamcode;
 
-
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
 import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Subsystems.Drive.Drive;
 import org.firstinspires.ftc.teamcode.Subsystems.Intake.Intake;
 
-
-@TeleOp(name = "Robot TeleOp")
-public class Robot extends LinearOpMode {
-
+@Autonomous(name = "Robot Auton")
+public class Auto extends LinearOpMode {
     private Drive drive = new Drive();
     private Intake intake = new Intake();
-
-    private GamepadEx gamepad;
-
     private ElapsedTime runtime = new ElapsedTime();
-
     @Override
     public void runOpMode() {
         CommandScheduler.getInstance().reset();
         drive.init(hardwareMap);
         intake.init(hardwareMap);
 
-        gamepad = new GamepadEx(gamepad1);
-
-
         drive.setDefaultCommand(
                 drive.driveCommand(
-                        () -> -gamepad1.left_stick_y,
-                        () -> gamepad1.right_stick_x,
-                        () -> gamepad1.left_stick_x
-                )
-        );
+                        () -> 0.0, () -> 0.0, () -> 0.0));
         intake.setDefaultCommand(intake.intakeStop());
-
-
 
         waitForStart();
         runtime.reset();
 
 
         while (opModeIsActive()) {
-            // robot code
-
-            CommandScheduler.getInstance().run();
-
-            telemetry.update();
-
-
-
-            gamepad.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileActiveContinuous(intake.intakeRun());
-            gamepad.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whileActiveContinuous(intake.intakeReverse());
-
-           // telemetry.update();
-
+            drive.driveCommand(()-> 0, ()-> 0, ()-> 1).andThen(intake.intakeRun());
         }
     }
+
 }

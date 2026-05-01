@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Subsystems.Drive;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 import static org.firstinspires.ftc.teamcode.Subsystems.Drive.DriveConstants.*;
 
 import com.arcrobotics.ftclib.command.RunCommand;
@@ -41,9 +42,10 @@ public class Drive extends SubsystemBase {
 
     public void drive (double forward, double turn, double straif){
         frontLeftPower = forward - turn - straif;
-        frontRightPower = forward + turn - straif;
-        backLeftPower = forward - turn - straif;
+        frontRightPower = forward + turn + straif;
+        backLeftPower = forward - turn + straif;
         backRightPower = forward + turn - straif;
+
 
         double max = Math.max(1.0, Math.max(
                 Math.max(Math.abs(frontLeftPower), Math.abs(frontRightPower)),
@@ -56,6 +58,12 @@ public class Drive extends SubsystemBase {
         frontRightDrive.setPower(frontRightPower);
         backLeftDrive.setPower(backLeftPower);
         backRightDrive.setPower(backRightPower);
+
+//        telemetry.addData("frontLeftPower", frontLeftPower);
+//        telemetry.addData("frontRightPower", frontRightPower);
+//        telemetry.addData("backLeftPower", backLeftPower);
+//        telemetry.addData("backRightPower", backRightPower);
+
     }
 
     public Command driveCommand(DoubleSupplier forward, DoubleSupplier turn, DoubleSupplier straif) {
