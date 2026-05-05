@@ -13,30 +13,49 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Subsystems.Drive.Drive;
 import org.firstinspires.ftc.teamcode.Subsystems.Intake.Intake;
 
-@Autonomous(name = "Robot Auton")
-public class Auto extends LinearOpMode {
-    private Drive drive = new Drive();
-    private Intake intake = new Intake();
-    private ElapsedTime runtime = new ElapsedTime();
-    @Override
-    public void runOpMode() {
-        CommandScheduler.getInstance().reset();
-        drive.init(hardwareMap);
-        intake.init(hardwareMap);
+    @Autonomous(name = "Robot Auton")
+    public class Auto extends LinearOpMode {
+        // It is safer to initialize these as null and set them in runOpMode
+        private Drive drive;
+        private Intake intake;
 
-        drive.setDefaultCommand(
-                drive.driveCommand(
-                        () -> 0.0, () -> 0.0, () -> 0.0));
-        intake.setDefaultCommand(intake.intakeStop());
+        @Override
+        public void runOpMode() {
+            // 1. Reset the scheduler (Crucial for Auto)
+            CommandScheduler.getInstance().reset();
 
-        waitForStart();
-        runtime.reset();
+            drive = new Drive();
+            intake = new Intake();
+
+            drive.init(hardwareMap);
+            intake.init(hardwareMap);
 
 
-        while (opModeIsActive()) {
-            new RunCommand(() -> drive.driveCommand(()-> 0, ()-> 0, ()-> 1)).andThen(intake.intakeRun());
+//            SequentialCommandGroup autoSequence = new SequentialCommandGroup(
+//                    drive.driveCommand(() -> -1.0, () -> 0.0, () -> 0.0)
+//                            .withTimeout(1500)
+//                            .andThen(intake.intakeRun()
+//                                    .alongWith(drive.driveCommand(()-> 0.05, ()-> 0, ()->0)))
+//            );
 
+            SequentialCommandGroup autoSequence = new SequentialCommandGroup(
+                    drive.driveCommand(() -> -1.0, () -> 0.0, () -> 0.0)
+                            .withTimeout(1500)
+                            .andThen(drive.driveCommand(() -> 0.0, () -> 1.0, () -> 0.0).withTimeout(1500).andThen(intake.intakeRun()).withTimeout(250), intake.intakeReverse().withTimeout(437), drive.driveCommand(() -> 0.0, () -> 0.0, () -> 1.0).withTimeout(400))
+            );
+
+
+            waitForStart();
+
+            autoSequence.schedule();
+
+            while (opModeIsActive() && !isStopRequested()) {
+                CommandScheduler.getInstance().run();
+
+                telemetry.addData("Status", "Running Auto");
+                telemetry.update();
+            }
+
+            CommandScheduler.getInstance().reset();
         }
     }
-
-}
